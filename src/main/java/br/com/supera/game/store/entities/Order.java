@@ -72,7 +72,11 @@ public class Order implements Serializable {
 	public Double getTotal() {
 		double total = 0;
 		for (OrderItem x : items) {
-			total += x.getSubTotal();
+			if (total >= 250.00) {
+				total += x.getSubTotal();
+			} else {
+				total += x.getSubTotal() + 10.00;
+			}
 		}
 		return total;
 	}
