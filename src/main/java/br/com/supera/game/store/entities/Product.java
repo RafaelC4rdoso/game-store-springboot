@@ -31,7 +31,7 @@ public class Product {
 		this.image = image;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
