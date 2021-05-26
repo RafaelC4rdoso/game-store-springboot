@@ -1,6 +1,7 @@
 package br.com.supera.game.store.entities;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -12,7 +13,7 @@ import br.com.supera.game.store.entities.pk.OrderItemPK;
 
 @Entity
 @Table(name = "tb_order_item")
-public class OrderItem implements Serializable {
+public class OrderItem implements Serializable, Comparator<OrderItem> {
 	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId
@@ -92,6 +93,11 @@ public class OrderItem implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compare(OrderItem o1, OrderItem o2) {
+		return o1.getPrice().compareTo(o2.getPrice());
 	}
 
 }
