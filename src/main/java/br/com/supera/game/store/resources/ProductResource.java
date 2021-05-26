@@ -13,7 +13,7 @@ import br.com.supera.game.store.entities.Product;
 import br.com.supera.game.store.services.ProductService;
 
 @RestController
-@RequestMapping(value = "/product")
+@RequestMapping(value = "/products")
 public class ProductResource {
 	
 	@Autowired

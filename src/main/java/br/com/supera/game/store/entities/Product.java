@@ -1,10 +1,16 @@
 package br.com.supera.game.store.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_product")
@@ -18,7 +24,10 @@ public class Product {
 	private Double price;
 	private short score;
 	private String image;
-
+	
+	@OneToMany(mappedBy = "id.product")
+	private Set<OrderItem> item = new HashSet<>();
+	
 	public Product() {
 	}
 
@@ -31,7 +40,7 @@ public class Product {
 		this.image = image;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -69,6 +78,15 @@ public class Product {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+	
+	@JsonIgnore
+	public Set<Order> getOrders() {
+		Set<Order> set = new HashSet<>();
+		for (OrderItem x : item) {
+			set.add(x.getOrder());
+		}
+		return set;
 	}
 
 	@Override
